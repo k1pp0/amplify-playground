@@ -10,6 +10,11 @@
       "StackName": "amplify-playground-dev-132259",
       "StackId": "arn:aws:cloudformation:us-east-1:939087749135:stack/amplify-playground-dev-132259/5c6e6190-3dca-11ee-a736-0a3123d2de43",
       "AmplifyAppId": "d3si24a9dtps23"
+    },
+    "categories": {
+      "function": {
+        "v1": {}
+      }
     }
   }
 }
