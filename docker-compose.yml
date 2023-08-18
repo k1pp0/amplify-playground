@@ -1,0 +1,19 @@
+version: "3"
+services:
+  amplify:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace:cache
+      - aws-data:/root/.aws
+      - amplify-data:/root/.amplify
+    env_file:
+      - .env
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_DEFAULT_OUTPUT: json
+
+volumes:
+  aws-data:
+  amplify-data:
