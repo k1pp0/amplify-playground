@@ -13,6 +13,12 @@
     },
     "categories": {
       "function": {
+        "v1": {
+          "deploymentBucketName": "amplify-playground-dev-132259-deployment",
+          "s3Key": "amplify-builds/v1-4277536f6a2f53396755-build.zip"
+        }
+      },
+      "api": {
         "v1": {}
       }
     }
