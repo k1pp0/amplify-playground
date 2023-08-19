@@ -18,6 +18,7 @@
   "function": {
     "v1": {
       "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -32,6 +33,14 @@
       ]
     },
     "AMPLIFY_function_v1_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "v1"
+        }
+      ]
+    },
+    "AMPLIFY_function_v1_tz": {
       "usedBy": [
         {
           "category": "function",

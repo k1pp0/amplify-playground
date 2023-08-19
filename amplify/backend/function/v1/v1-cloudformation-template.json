@@ -15,6 +15,9 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "tz": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -69,6 +72,9 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "TZ": {
+              "Ref": "tz"
             }
           }
         },
@@ -79,7 +85,9 @@
           ]
         },
         "Runtime": "python3.11",
-        "Layers": [],
+        "Layers": [
+          "arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:40"
+        ],
         "Timeout": 25
       }
     },
