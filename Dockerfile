@@ -12,7 +12,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g @aws-amplify/cli && npm install -g vite@latest
 
 # Install AWS CLI & other tools
-RUN pip install awscli pipenv aws_lambda_powertools boto3 botostubs
+RUN pip install awscli pipenv aws_lambda_powertools boto3 botostubs pytest
 RUN pip install --upgrade pip
 
 WORKDIR /workspace
