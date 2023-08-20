@@ -13,3 +13,6 @@ class ServiceResult:
     @property
     def json(self):
         return self.__json
+
+    def __str__(self):
+        return f"status: {self.__status}, json: {self.json}"
