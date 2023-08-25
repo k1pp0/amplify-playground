@@ -44,6 +44,18 @@ def read_todo(todo_id: str) -> dict:
     )
     return response
 
+@app.get("/api/v1/todos")
+def list_todo() -> dict:
+    todo_service: TodoService = TodoService(TodoPort(LocalTodoAdapter()))
+    result: ServiceResult = todo_service.list_todo(app.current_event.get('queryStringParameters'))
+    logger.info(result)
+    response: Response = Response(
+        status_code=result.status.value,
+        content_type=content_types.APPLICATION_JSON,
+        body=result.json
+    )
+    return response
+
 @logger.inject_lambda_context(correlation_id_path=correlation_paths.API_GATEWAY_REST)
 def handler(event, context):
     logger.info(event)
