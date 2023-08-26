@@ -14,7 +14,7 @@ from common.service_result import ServiceResult
 
 from service.todo_service import TodoService
 from port.todo_port import TodoPort
-from adapter.local_todo_adapter import LocalTodoAdapter
+from adapter.dynamo_todo_adapter import DynamoTodoAdapter
 
 app = APIGatewayRestResolver()
 logger = Logger(service='playground', use_rfc3339=True) 
@@ -34,7 +34,7 @@ def hello() -> dict:
 
 @app.get("/api/v1/todos/<todo_id>")
 def read_todo(todo_id: str) -> dict:
-    todo_service: TodoService = TodoService(TodoPort(LocalTodoAdapter()))
+    todo_service: TodoService = TodoService(TodoPort(DynamoTodoAdapter(table_name='Todos')))
     result: ServiceResult = todo_service.read_todo(todo_id)
     logger.info(result)
     response: Response = Response(
@@ -46,7 +46,7 @@ def read_todo(todo_id: str) -> dict:
 
 @app.get("/api/v1/todos")
 def list_todo() -> dict:
-    todo_service: TodoService = TodoService(TodoPort(LocalTodoAdapter()))
+    todo_service: TodoService = TodoService(TodoPort(DynamoTodoAdapter(table_name='Todos')))
     result: ServiceResult = todo_service.list_todo(app.current_event.get('queryStringParameters'))
     logger.info(result)
     response: Response = Response(

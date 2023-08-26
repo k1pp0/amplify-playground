@@ -62,3 +62,62 @@ Environment variables:
 Secrets configuration
 - Not configured
 ```
+
+## amplify add storage
+```
+? Select from one of the below mentioned services: NoSQL Database
+
+Welcome to the NoSQL DynamoDB database wizard
+This wizard asks you a series of questions to help determine how to set up your NoSQL database table.
+
+✔ Provide a friendly name · v1
+✔ Provide table name · v1
+
+You can now add columns to the table.
+
+✔ What would you like to name this column · PK
+✔ Choose the data type · string
+✔ Would you like to add another column? (Y/n) · yes
+✔ What would you like to name this column · SK
+✔ Choose the data type · string
+✔ Would you like to add another column? (Y/n) · no
+
+Before you create the database, you must specify how items in your table are uniquely organized. You do this by specifying a primary key. The primary key uniquely identifies each item in the table so that no two items can have the same key. This can be an individual column, or a combination that includes a primary key and a sort key.
+
+To learn more about primary keys, see:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey
+
+✔ Choose partition key for the table · PK
+✔ Do you want to add a sort key to your table? (Y/n) · yes
+Only one option for [Choose sort key for the table]. Selecting [SK].
+
+You can optionally add global secondary indexes for this table. These are useful when you run queries defined in a different column than the primary key.
+To learn more about indexes, see:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.SecondaryIndexes
+
+✔ Do you want to add global secondary indexes to your table? (Y/n) · no
+✔ Do you want to add a Lambda Trigger for your Table? (y/N) · no
+```
+
+## amplify update function
+```
+? Select the Lambda function you want to update v1
+General information
+- Name: v1
+- Runtime: python
+
+Resource access permission
+- v1 (create, read, update, delete)
+
+Scheduled recurring invocation
+- Not configured
+
+Lambda layers
+- arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:40
+
+Environment variables:
+- TZ: Asia/Tokyo
+
+Secrets configuration
+- Not configured
+```

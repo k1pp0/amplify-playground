@@ -18,13 +18,31 @@
   "function": {
     "v1": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "todos"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
     "AMPLIFY_function_v1_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "v1"
+        }
+      ]
+    },
+    "AMPLIFY_function_v1_environment": {
       "usedBy": [
         {
           "category": "function",
@@ -47,6 +65,12 @@
           "resourceName": "v1"
         }
       ]
+    }
+  },
+  "storage": {
+    "todos": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

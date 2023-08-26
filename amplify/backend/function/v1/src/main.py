@@ -1,12 +1,14 @@
+import os
+
 from common.service_result import ServiceResult
 
 from service.todo_service import TodoService
 from port.todo_port import TodoPort
-from adapter.local_todo_adapter import LocalTodoAdapter
+from adapter.dynamo_todo_adapter import DynamoTodoAdapter
 
 
 def main():
-    todo_service: TodoService = TodoService(TodoPort(LocalTodoAdapter()))
+    todo_service: TodoService = TodoService(TodoPort(DynamoTodoAdapter(table_name="Todos")))
 
     result: ServiceResult = todo_service.read_todo('id_1')
     print(result)

@@ -9,6 +9,20 @@
     {
       "cloudFormationParameterName": "tz",
       "environmentVariableName": "TZ"
+    },
+    {
+      "cloudFormationParameterName": "environment",
+      "environmentVariableName": "ENVIRONMENT"
     }
-  ]
+  ],
+  "permissions": {
+    "storage": {
+      "todos": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
 }
