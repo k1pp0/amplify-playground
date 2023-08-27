@@ -17,11 +17,11 @@ def main():
     print(result)
 
     query_string_parameters: dict = {
-        "fields[todo]": "title,description,due_date", 
-        "page[offset]": "0",
-        "page[size]": "10", 
-        "filter[due_date][le]": "2023-08-14", 
-        "sort": "description,-due_date"
+        # "fields[todo]": "title,description,due_date", 
+        # "page[offset]": "0",
+        # "page[size]": "10", 
+        # "filter[due_date][le]": "2023-08-14", 
+        # "sort": "description,-due_date"
     }
     result: ServiceResult = todo_service.list_todo(query_string_parameters)
     print(result)

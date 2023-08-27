@@ -20,10 +20,22 @@ class DynamoTodoAdapter(ITodoAdapter):
                 todo_id=item['todo_id'],
                 title=item['title'],
                 description=item['description'],
-                due_date=item['due_date']
+                due_date=item['due_date'],
+                is_completed=item['is_completed']
             )
         else:
             raise ValueError(f"Todo with ID {todo_id} not found.")
     
     def list(self, params: dict) -> List[Todo]:
-        return None
+        response = self._table.scan()
+        todos = [
+            Todo(
+                todo_id=item['todo_id'],
+                title=item['title'],
+                description=item['description'],
+                due_date=item['due_date'],
+                is_completed=item['is_completed']
+            ) 
+            for item in response.get('Items', [])
+        ]
+        return todos

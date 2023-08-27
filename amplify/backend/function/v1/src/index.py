@@ -21,14 +21,14 @@ logger = Logger(service='playground', use_rfc3339=True)
 
 @app.get("/api/v1/hello")
 def hello() -> dict:
-    result: dict = ServiceResult(
+    result: ServiceResult = ServiceResult(
         status=HTTPStatus.OK,
-        json=json.dumps('Hello from your new Amplify Python lambda!')
+        body=json.dumps('Hello from your new Amplify Python lambda!')
     )
     response: Response = Response(
         status_code=result.status.value,
         content_type=content_types.APPLICATION_JSON,
-        body=result.json
+        body=result.body
     )
     return response
 
@@ -40,7 +40,7 @@ def read_todo(todo_id: str) -> dict:
     response: Response = Response(
         status_code=result.status.value,
         content_type=content_types.APPLICATION_JSON,
-        body=result.json
+        body=result.body
     )
     return response
 
@@ -52,7 +52,7 @@ def list_todo() -> dict:
     response: Response = Response(
         status_code=result.status.value,
         content_type=content_types.APPLICATION_JSON,
-        body=result.json
+        body=result.body
     )
     return response
 

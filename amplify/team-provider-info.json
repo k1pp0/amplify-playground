@@ -15,7 +15,7 @@
       "function": {
         "v1": {
           "deploymentBucketName": "amplify-playground-dev-132259-deployment",
-          "s3Key": "amplify-builds/v1-6e525472637153724479-build.zip",
+          "s3Key": "amplify-builds/v1-703344466d482b69796e-build.zip",
           "tz": "Asia/Tokyo",
           "environment": "dev"
         }

@@ -7,9 +7,9 @@ from model.todo import Todo
 class ITodoPort(metaclass=ABCMeta):
 
     @abstractmethod
-    def read_todo(self, todo_id:str) -> Todo:
+    def get_todo_by_id(self, todo_id:str) -> Todo:
         raise NotImplementedError()
 
     @abstractmethod
-    def list_todo(self, query_string_parameters: dict) -> List[Todo]:
+    def list_todo_with_query_string_parameters(self, query_string_parameters: dict) -> List[Todo]:
         raise NotImplementedError()
