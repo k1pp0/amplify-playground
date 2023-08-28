@@ -31,20 +31,26 @@ class QueryStringParameters:
             raise ValueError(f"The operator '{operator}' is not allowed. Allowed operators are: {', '.join(self.ALLOWED_OPERATORS)}")
 
     def convert(self, params: dict):
+        if params is None:
+            return {}
+
         convertd = {}
-        
-        fields_key = f"fields[{self._model_name}]"
-        if fields_key in params:
-            convertd["fields"] = params[fields_key].split(',')
-            for field_name in convertd["fields"]:
-                self._validate_model_field(field_name)
-        
+        convertd["fields"] = self._extract_fields(params)
         convertd["filters"] = self._extract_filters(params)
-        convertd["sorts"] = self._extract_sorts(params)
+        convertd["sort"] = self._extract_sorts(params)
         convertd["page_offset"] = int(params.get("page[offset]", 0))
         convertd["page_size"] = int(params.get("page[size]", 10))
-
         return convertd
+
+    def _extract_fields(self, params: dict) -> List[str]:
+        fields_key = f"fields[{self._model_name}]"
+        if fields_key not in params:
+            return []
+        
+        fields = params[fields_key].split(',')
+        for field_name in fields:
+            self._validate_model_field(field_name)
+        return fields
 
     def _extract_filters(self, params: dict) -> List[dict]:
         filters = []
@@ -59,6 +65,9 @@ class QueryStringParameters:
         return filters
 
     def _extract_sorts(self, params: dict) -> List[dict]:
+        if "sort" not in params:
+            return []
+        
         sorts = []
         for field_name in params.get("sort", "").split(','):
             order = "asc"
