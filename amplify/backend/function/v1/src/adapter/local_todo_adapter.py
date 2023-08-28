@@ -12,7 +12,8 @@ class LocalTodoAdapter(ITodoAdapter):
                 todo_id=f"id_{i}",
                 title=f"Task {i}",
                 description=f"Description for Task { 'Odd' if i % 2 == 1 else 'Even' }",
-                due_date=f"2023-08-{10+i}"
+                due_date=f"2020-01-{20-i}",
+                is_completed=True if i % 5 == 0 else False
             ))
     
     def read(self, todo_id: str) -> Todo:

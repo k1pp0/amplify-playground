@@ -5,9 +5,9 @@ class QueryStringParameters:
 
     ALLOWED_OPERATORS = set([
         "eq", "ne", "lt", "le", "gt", "ge",
-        "in", "nin", "like", "ilike", 
-        "startswith", "endswith",
-        "isnull", "notnull"
+        "startswith", "contains",
+        "in", "between", "not",
+        "attribute_exists", "attribute_not_exists"
     ])
 
     def __init__(self, model: Any):
@@ -20,7 +20,7 @@ class QueryStringParameters:
     
     @staticmethod
     def _extract_model_fields(model: Any) -> List[str]:
-        return [attr for attr in dir(model) if not callable(getattr(model, attr)) and not attr.startswith("__")]
+        return [attr for attr in dir(model) if not callable(getattr(model, attr)) and not attr.startswith("_")]
 
     def _validate_model_field(self, field_name: str):
         if field_name not in self._model_fields:
@@ -32,7 +32,7 @@ class QueryStringParameters:
 
     def convert(self, params: dict):
         if params is None:
-            return {}
+            return {"fields": [], "filters": [], "sort": [], "page_offset": 0, "page_size": 10}
 
         convertd = {}
         convertd["fields"] = self._extract_fields(params)
@@ -41,10 +41,10 @@ class QueryStringParameters:
         convertd["page_offset"] = int(params.get("page[offset]", 0))
         convertd["page_size"] = int(params.get("page[size]", 10))
         return convertd
-
+    
     def _extract_fields(self, params: dict) -> List[str]:
         fields_key = f"fields[{self._model_name}]"
-        if fields_key not in params:
+        if fields_key not in params or params[fields_key] == "":
             return []
         
         fields = params[fields_key].split(',')

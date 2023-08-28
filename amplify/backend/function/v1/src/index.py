@@ -35,7 +35,7 @@ def hello() -> dict:
 @app.get("/api/v1/todos/<todo_id>")
 def read_todo(todo_id: str) -> dict:
     todo_service: TodoService = TodoService(TodoPort(DynamoTodoAdapter(table_name='Todos')))
-    result: ServiceResult = todo_service.read_todo(todo_id)
+    result: ServiceResult = todo_service.read_todo(todo_id, app.current_event.get('queryStringParameters'))
     logger.info(result)
     response: Response = Response(
         status_code=result.status.value,

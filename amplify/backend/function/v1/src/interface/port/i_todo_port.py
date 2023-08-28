@@ -7,7 +7,7 @@ from model.todo import Todo
 class ITodoPort(metaclass=ABCMeta):
 
     @abstractmethod
-    def get_todo_by_id(self, todo_id:str) -> Todo:
+    def get_todo_by_id(self, todo_id:str, query_string_parameters: dict) -> Todo:
         raise NotImplementedError()
 
     @abstractmethod

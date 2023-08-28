@@ -17,13 +17,24 @@ test_todo_0: Todo = Todo(
     is_completed=False
 )
 
+test_todo_1: Todo = Todo(
+    todo_id="id_1",
+    title="Task 1",
+    description="Description for Task 1",
+    due_date="2023-08-11",
+    is_completed=True
+)
+
 
 class DummyTodoAdapter(ITodoAdapter):
-    def read(self, todo_id: str) -> Todo:
+    def read(self, todo_id: str, params: dict) -> Todo:
         if todo_id == test_todo_0.todo_id:
             return test_todo_0
         else:
             raise ValueError(f"Todo with ID {todo_id} not found.")
+        
+    def list(self, params: dict) -> Todo:
+        return [test_todo_0, test_todo_1]
 
 @pytest.fixture()
 def fixture_todo_service():
@@ -31,10 +42,10 @@ def fixture_todo_service():
     yield todo_service
     todo_service = None
 
-def test_todo_service_exist(fixture_todo_service):
+def test_todo_service_read_todo_with_exist_id(fixture_todo_service):
     target: TodoService = fixture_todo_service
-    result: ServiceResult = target.read_todo(test_todo_0.todo_id)
-    todo: dict = json.loads(result.json)
+    result: ServiceResult = target.read_todo(test_todo_0.todo_id, None)
+    todo: dict = json.loads(result.body)
 
     assert result != None
     assert result.status.value == 200
@@ -44,10 +55,24 @@ def test_todo_service_exist(fixture_todo_service):
     assert todo["due_date"] == test_todo_0.due_date
     assert todo["is_completed"] == test_todo_0.is_completed
 
-def test_todo_service_not_exist(fixture_todo_service):
+def test_todo_service_read_todo_with_not_exist_id(fixture_todo_service):
     target: TodoService = fixture_todo_service
-    result: ServiceResult = target.read_todo("not_exist_id")
+    result: ServiceResult = target.read_todo("not_exist_id", {})
 
     assert result != None
     assert result.status.value == 404
-    assert result.json == None
+    assert result.body == None
+
+def test_todo_service_list_todo(fixture_todo_service):
+    target: TodoService = fixture_todo_service
+    result: ServiceResult = target.list_todo(None)
+    todos: dict = json.loads(result.body)
+
+    assert result != None
+    assert result.status.value == 200
+    assert len(todos) == 2
+    assert todos[1]["todo_id"] == test_todo_1.todo_id
+    assert todos[1]["title"] == test_todo_1.title
+    assert todos[1]["description"] == test_todo_1.description
+    assert todos[1]["due_date"] == test_todo_1.due_date
+    assert todos[1]["is_completed"] == test_todo_1.is_completed

@@ -1,4 +1,4 @@
-import json
+from typing import List
 
 
 class Todo:
@@ -39,11 +39,8 @@ class Todo:
         status = "Completed" if self._is_completed else "Incomplete"
         return f"Todo ID: {self._todo_id}\nTitle: {self._title}\nDescription: {self._description}\nDue Date: {self._due_date}\nStatus: {status}"
 
-    def to_dict(self):
-        return {
-            "todo_id": self._todo_id,
-            "title": self._title,
-            "description": self._description,
-            "due_date": self._due_date,
-            "is_completed": self._is_completed
-        }
+    def to_dict(self, fields: List[str] = None) -> dict:
+        if fields is not None and len(fields) != 0:
+            return {field: getattr(self, field) for field in fields if hasattr(self, field)}
+        else:
+            return {attr: getattr(self, attr) for attr in dir(self) if not callable(getattr(self, attr)) and not attr.startswith("_")}

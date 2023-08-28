@@ -7,7 +7,7 @@ from model.todo import Todo
 class ITodoAdapter(metaclass=ABCMeta):
     
     @abstractmethod
-    def read(self, todo_id: str) -> Todo:
+    def read(self, todo_id: str, params: dict) -> Todo:
         raise NotImplementedError()
 
     @abstractmethod
