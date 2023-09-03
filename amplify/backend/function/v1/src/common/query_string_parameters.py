@@ -47,7 +47,8 @@ class QueryStringParameters:
         if fields_key not in params or params[fields_key] == "":
             return []
         
-        fields = params[fields_key].split(',')
+        fields = set(params[fields_key].split(','))
+        fields.add(f"{self._model_name}_id")
         for field_name in fields:
             self._validate_model_field(field_name)
         return fields

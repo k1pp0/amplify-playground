@@ -49,11 +49,11 @@ def test_todo_service_read_todo_with_exist_id(fixture_todo_service):
 
     assert result != None
     assert result.status.value == 200
-    assert todo["todo_id"] == test_todo_0.todo_id
-    assert todo["title"] == test_todo_0.title
-    assert todo["description"] == test_todo_0.description
-    assert todo["due_date"] == test_todo_0.due_date
-    assert todo["is_completed"] == test_todo_0.is_completed
+    assert todo["data"]["id"] == test_todo_0.todo_id
+    assert todo["data"]["attributes"]["title"] == test_todo_0.title
+    assert todo["data"]["attributes"]["description"] == test_todo_0.description
+    assert todo["data"]["attributes"]["due_date"] == test_todo_0.due_date
+    assert todo["data"]["attributes"]["is_completed"] == test_todo_0.is_completed
 
 def test_todo_service_read_todo_with_not_exist_id(fixture_todo_service):
     target: TodoService = fixture_todo_service
@@ -71,8 +71,8 @@ def test_todo_service_list_todo(fixture_todo_service):
     assert result != None
     assert result.status.value == 200
     assert len(todos) == 2
-    assert todos[1]["todo_id"] == test_todo_1.todo_id
-    assert todos[1]["title"] == test_todo_1.title
-    assert todos[1]["description"] == test_todo_1.description
-    assert todos[1]["due_date"] == test_todo_1.due_date
-    assert todos[1]["is_completed"] == test_todo_1.is_completed
+    assert todos[1]["data"]["id"] == test_todo_1.todo_id
+    assert todos[1]["data"]["attributes"]["title"] == test_todo_1.title
+    assert todos[1]["data"]["attributes"]["description"] == test_todo_1.description
+    assert todos[1]["data"]["attributes"]["due_date"] == test_todo_1.due_date
+    assert todos[1]["data"]["attributes"]["is_completed"] == test_todo_1.is_completed
