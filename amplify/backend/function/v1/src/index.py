@@ -56,6 +56,18 @@ def list_todo() -> dict:
     )
     return response
 
+@app.post("/api/v1/todos")
+def post_todo() -> dict:
+    todo_service: TodoService = TodoService(TodoPort(DynamoTodoAdapter(table_name='Todos')))
+    result: ServiceResult = todo_service.create_todo(app.current_event.json_body)
+    logger.info(result)
+    response: Response = Response(
+        status_code=result.status.value,
+        content_type=content_types.APPLICATION_JSON,
+        body=result.body
+    )
+    return response
+
 @logger.inject_lambda_context(correlation_id_path=correlation_paths.API_GATEWAY_REST)
 def handler(event, context):
     logger.info(event)

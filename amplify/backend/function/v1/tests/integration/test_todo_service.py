@@ -36,6 +36,9 @@ class DummyTodoAdapter(ITodoAdapter):
     def list(self, params: dict) -> Todo:
         return [test_todo_0, test_todo_1]
 
+    def create(self, params: dict) -> Todo:
+        return test_todo_0
+
 @pytest.fixture()
 def fixture_todo_service():
     todo_service: TodoService = TodoService(TodoPort(DummyTodoAdapter()))

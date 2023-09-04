@@ -1,0 +1,13 @@
+{
+    "resource": "/api/v1/{proxy+}",
+    "path": "/api/v1/todos",
+    "httpMethod": "POST",
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": {
+        "proxy": "todos"
+    },
+    "stageVariables": null,
+    "body": "{\n  \"data\": {\n    \"type\": \"todo\",\n    \"id\": \"id_100\",\n    \"attributes\": {\n      \"title\": \"Title 100\"\n    }\n  }\n}",
+    "isBase64Encoded": false
+}

@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 src = {editable = true, path = "./src"}
+aws_lambda_powertools = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.11"

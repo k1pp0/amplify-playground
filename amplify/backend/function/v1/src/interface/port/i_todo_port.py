@@ -13,3 +13,7 @@ class ITodoPort(metaclass=ABCMeta):
     @abstractmethod
     def list_todo_with_query_string_parameters(self, query_string_parameters: dict) -> List[Todo]:
         raise NotImplementedError()
+
+    @abstractmethod
+    def create_todo(self, body: dict) -> Todo:
+        raise NotImplementedError()

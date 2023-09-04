@@ -13,3 +13,7 @@ class ITodoAdapter(metaclass=ABCMeta):
     @abstractmethod
     def list(self, params: dict) -> List[Todo]:
         raise NotImplementedError()
+
+    @abstractmethod
+    def create(self, request_body: dict) -> Todo:
+        raise NotImplementedError()

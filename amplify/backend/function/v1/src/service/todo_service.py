@@ -29,3 +29,9 @@ class TodoService():
         except ValueError:
             return ServiceResult(status=HTTPStatus.NOT_FOUND, body=None)
         
+    def create_todo(self, request_body: dict) -> ServiceResult:
+        try:
+            todo = self._todo_port.create_todo(request_body)
+            return ServiceResult(status=HTTPStatus.OK, body=json.dumps(todo))
+        except ValueError:
+            return ServiceResult(status=HTTPStatus.NOT_FOUND, body=None)

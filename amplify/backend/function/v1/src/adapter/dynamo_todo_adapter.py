@@ -36,6 +36,10 @@ class DynamoTodoAdapter(ITodoAdapter):
         response = self._table.scan(**query_parameters)
         todos = [Todo(**item) for item in response.get('Items', [])]
         return todos
+    
+    def create(self, todo: Todo) -> Todo:
+        response = self._table.put_item(Item=todo.to_dict())
+        return todo
 
     def build_filter_expression(self, filters: List[dict]) -> boto3.dynamodb.conditions:
         if len(filters) == 0:

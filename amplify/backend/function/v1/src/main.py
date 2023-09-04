@@ -38,6 +38,18 @@ def main():
     result: ServiceResult = todo_service.list_todo(None)
     print(result)
 
+    request_body: dict = {
+        "data":{
+            "type":"todo",
+            "id": "100",
+            "attributes":{
+                "title":"Title 100"
+            }
+        }
+    }
+    result: ServiceResult = todo_service.create_todo(request_body)
+    print(result)
+
 
 def setup():
     dynamodb = boto3.resource('dynamodb', endpoint_url=os.environ.get('DYNAMO_ENDPOINT_URL', None))

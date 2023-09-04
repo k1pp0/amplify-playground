@@ -72,3 +72,6 @@ class LocalTodoAdapter(ITodoAdapter):
 
         todos: List[Todo] = filter_and_sort_data(self._todo_data, params)
         return todos
+
+    def create(self, todo: Todo) -> Todo:
+        return todo

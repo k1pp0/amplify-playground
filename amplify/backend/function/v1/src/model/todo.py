@@ -1,4 +1,5 @@
 from typing import List
+import uuid
 
 
 class Todo:
@@ -34,6 +35,9 @@ class Todo:
 
     def mark_as_incomplete(self):
         self._is_completed = False
+
+    def set_new_uuid(self):
+        self._todo_id = str(uuid.uuid4())
 
     def __str__(self):
         status = "Completed" if self._is_completed else "Incomplete"
