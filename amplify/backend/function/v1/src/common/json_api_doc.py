@@ -4,11 +4,11 @@ from typing import Dict, Any, List
 class JsonApiDoc:
 
     def __init__(self, model: Any):
-        self._model_name = self._generate_model_name(model)
+        self._model_name = self._convert_class_name_to_snake_case(model)
         self._model_fields = self._extract_model_fields(model)
     
     @staticmethod
-    def _generate_model_name(model: Any) -> str:
+    def _convert_class_name_to_snake_case(model: Any) -> str:
         return re.sub(r'(?<!^)(?=[A-Z])', '_', model.__name__).lower()
     
     @staticmethod

@@ -30,4 +30,4 @@ class TodoPort(ITodoPort):
         request_todo: Todo = Todo(**model_class_dict)
         request_todo.set_new_uuid()
         todo: Todo = self._adapter.create(request_todo)
-        return todo.to_dict()
+        return self._serialize.model_class_to_json_api_dict(todo.to_dict())
